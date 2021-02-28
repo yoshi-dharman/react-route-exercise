@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 
+function activeNav(event,setActive){
+    setActive(event.target.innerText);
+}
 
 function Navbar(props) {
 
-    // let history = useHistory();
-    // console.log(history.location.pathname);
+    const [active, setActive] = useState("Home");
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,13 +21,16 @@ function Navbar(props) {
                         {/* <a class="nav-link active" aria-current="page" href="#">tes</a> */}
                         <div className="flex-lg-row flex-column d-flex">
                             <li className="nav-item">      
-                                <Link to="/" className="nav-link">Home</Link>
+                                <Link onClick={(event) => activeNav(event,setActive)} to="/" className={active === "Home" ?
+                                "nav-link active" : "nav-link"}>Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/gallery" className="nav-link">Gallery</Link>
+                                <Link onClick={(event) => activeNav(event,setActive)} to="/gallery" className={active === "Gallery" ?
+                                "nav-link active" : "nav-link"}>Gallery</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/profile" className="nav-link">Profile</Link>
+                                <Link onClick={(event) => activeNav(event,setActive)} to="/profile" className={active === "Profile" ?
+                                "nav-link active" : "nav-link"}>Profile</Link>
                             </li>
                         </div>
                         <div className="flex-lg-row flex-column d-flex">
@@ -36,13 +41,6 @@ function Navbar(props) {
             </div>
         </nav>
 
-        // <nav>
-        //     <Link className="text-danger" to="/">Home</Link>
-        //     <Link to="/gallery">Gallery</Link>
-        //     <Link to="/profile">Profile</Link>
-        //     <Link to="/login">Login</Link>
-        //     <Link to="/register">Register</Link>
-        // </nav>
     )
 }
 

@@ -1,17 +1,10 @@
 // import React from 'react'
-import React, { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import React from 'react';
 
 import GalleryItem from "../components/GalleryItem";
 
 
 function Gallery() {
-    let history = useHistory();
-
-    let dataUser = {
-        name : "",
-        biodata : "",
-    };
 
     let galleryData = [
         "img-1.jpg",
