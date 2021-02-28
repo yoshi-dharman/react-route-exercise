@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
-function Navbar() {
 
-    
+function Navbar(props) {
+
+    // let history = useHistory();
+    // console.log(history.location.pathname);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -15,7 +19,7 @@ function Navbar() {
                         {/* <a class="nav-link active" aria-current="page" href="#">tes</a> */}
                         <div className="flex-lg-row flex-column d-flex">
                             <li className="nav-item">      
-                                <Link to="/" className="nav-link active">Home</Link>
+                                <Link to="/" className="nav-link">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/gallery" className="nav-link">Gallery</Link>
@@ -25,12 +29,7 @@ function Navbar() {
                             </li>
                         </div>
                         <div className="flex-lg-row flex-column d-flex">
-                            <li className="nav-item">
-                                <Link to="/login" className="nav-link">Login</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/register" className="nav-link">Register</Link>
-                            </li>
+                            {props.button}
                         </div>
                     </ul>
                 </div>

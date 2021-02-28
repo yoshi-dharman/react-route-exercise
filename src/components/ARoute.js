@@ -8,20 +8,20 @@ import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
-function ARoute() {
+function ARoute(props) {
     return (
         <Switch>
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route path="/gallery/:name">
+            <Route path="/gallery">
                 <Gallery />
             </Route>
-            <Route path="/profile/:name">
+            <Route path="/profile">
                 <Profile />
             </Route>
             <Route path="/login">
-                <Login />
+                <Login setButton={props.setButton}/>
             </Route>
             <Route path="/register">
                 <Register />

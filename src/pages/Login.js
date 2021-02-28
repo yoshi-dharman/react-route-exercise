@@ -1,8 +1,9 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
+import LoginControl from '../components/LoginControl';
 
 
-let loginHandle = (event,history) => {
+let loginHandle = (event, history, setButton) => {
     event.preventDefault();
     let email = event.target.emailLogin.value;
     let pass = event.target.passwordLogin.value;
@@ -17,10 +18,11 @@ let loginHandle = (event,history) => {
                 return email === item.email && pass === item.password
             });
 
-            console.log(dataUser);
+            // console.log(dataUser);
             if(dataUser){
                 let { password, ...userData } = dataUser;
                 localStorage.user = JSON.stringify(userData);
+                setButton(<LoginControl />)
                 history.push("/");
             }
             else{
@@ -31,7 +33,7 @@ let loginHandle = (event,history) => {
         })
 }
 
-function Login() {
+function Login(props) {
     let history = useHistory();
 
     return (
@@ -40,7 +42,7 @@ function Login() {
             <h1>Login User</h1>
         </div>
         <div className="d-flex justify-content-center mt-4">
-            <form onSubmit={(event) => loginHandle(event,history)} className="col-6">
+            <form onSubmit={(event) => loginHandle(event, history, props.setButton)} className="col-6">
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input required name="emailLogin" type="email" className="form-control" id="inputEmailLogin" aria-describedby="emailHelp"></input>
