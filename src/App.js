@@ -1,17 +1,26 @@
 //React
-import React, { Switch,Route,Link } from 'react-router-dom'
+import React from 'react'
 
-//Element
 
+//Components
+import Navbar from './components/Navbar';
+import ARoute from './components/ARoute';
 
 //CSS
 import './App.css';
 
 function App() {
   return (
+
     <div>
-      cuma tes
+      <Navbar />
+
+      <div className="container mt-3">
+        <ARoute />
+      </div>
+
     </div>
+      
   );
 }
 
