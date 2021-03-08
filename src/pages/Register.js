@@ -1,14 +1,14 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useState } from "react-router-dom";
 
 
-let registerHandle = (event, history) => {
+let registerHandle = (event, history, register) => {
     event.preventDefault();
-    let name = event.target.nameRegister.value;
-    let email = event.target.emailRegister.value;
-    let pass = event.target.passwordRegister.value;
-    let passCheck = event.target.passwordCheckRegister.value;
-    let biodata = event.target.biodataRegister.value;
+    let name = register.name;
+    let email = register.email;
+    let pass = register.pass;
+    let passCheck = register.passCheck;
+    let biodata = register.biodata;
 
     if(pass !== passCheck){
         alert("Password anda dengan Confirm Password tidak sama!");
@@ -52,6 +52,20 @@ let registerHandle = (event, history) => {
 
 function Register() {
     let history = useHistory();
+    const [register, setRegister] = useState({
+        name : "",
+        email : "",
+        pass : "",
+        passCheck : "",
+        biodata : ""
+    })
+
+    let changeRegister = (e) => {
+        setRegister((prevState) => ({
+            ...prevState,
+            [e.target.name] : e.target.value
+        }));
+    }
 
     return (
         <div className="row mt-5">
@@ -59,27 +73,27 @@ function Register() {
             <h1>Register User</h1>
         </div>
         <div className="d-flex justify-content-center mt-4">
-            <form onSubmit={(event) => registerHandle(event,history)} className="col-6">
+            <form onSubmit={(event) => registerHandle(event,history,register)} className="col-6">
                 <div className="mb-3">
                     <label htmlFor="exampleInputName" className="form-label">Name</label>
-                    <input required name="nameRegister" type="text" className="form-control" id="inputNameRegister"></input>
+                    <input required onChange={changeRegister} name="nameRegister" type="text" className="form-control" id="inputNameRegister"></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                    <input required name="emailRegister" type="email" className="form-control" id="inputEmailRegister" aria-describedby="emailHelp"></input>
+                    <input required onChange={changeRegister} name="emailRegister" type="email" className="form-control" id="inputEmailRegister" aria-describedby="emailHelp"></input>
                     {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                    <input required name="passwordRegister" type="password" className="form-control" id="inputPasswordRegister"></input>
+                    <input required onChange={changeRegister} name="passwordRegister" type="password" className="form-control" id="inputPasswordRegister"></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword2" className="form-label">Confirm Password</label>
-                    <input required name="passwordCheckRegister" type="password" className="form-control" id="inputPasswordRegisterCheck"></input>
+                    <input required onChange={changeRegister} name="passwordCheckRegister" type="password" className="form-control" id="inputPasswordRegisterCheck"></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputBiodata" className="form-label">Biodata</label>
-                    <textarea required name="biodataRegister" rows="3" className="form-control" id="inputBiodataRegister"></textarea>
+                    <textarea required onChange={changeRegister} name="biodataRegister" rows="3" className="form-control" id="inputBiodataRegister"></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>
             </form>

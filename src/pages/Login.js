@@ -1,12 +1,12 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useState } from "react-router-dom";
 import LoginControl from '../components/LoginControl';
 
 
-let loginHandle = (event, history, setButton) => {
+let loginHandle = (event, history, setButton, login) => {
     event.preventDefault();
-    let email = event.target.emailLogin.value;
-    let pass = event.target.passwordLogin.value;
+    let email = login.email;
+    let pass = login.pass;
 
     let url = "https://6023acfe6bf3e6001766b5db.mockapi.io/reactGallery";
 
@@ -35,6 +35,17 @@ let loginHandle = (event, history, setButton) => {
 
 function Login(props) {
     let history = useHistory();
+    const [login, setLogin] = useState({
+        email : "",
+        pass : ""
+    })
+
+    let changeLogin = (e) => {
+        setLogin((prevState) => ({
+            ...prevState,
+            [e.target.name] : e.target.value
+        }));
+    }
 
     return (
         <div className="row mt-5">
@@ -42,14 +53,14 @@ function Login(props) {
             <h1>Login User</h1>
         </div>
         <div className="d-flex justify-content-center mt-4">
-            <form onSubmit={(event) => loginHandle(event, history, props.setButton)} className="col-6">
+            <form onSubmit={(event) => loginHandle(event, history, props.setButton, login)} className="col-6">
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                    <input required name="emailLogin" type="email" className="form-control" id="inputEmailLogin" aria-describedby="emailHelp"></input>
+                    <input required onChange={changeLogin} name="emailLogin" type="email" className="form-control" id="inputEmailLogin" aria-describedby="emailHelp"></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                    <input required name="passwordLogin" type="password" className="form-control" id="inputPasswordLogin"></input>
+                    <input required onChange={changeLogin} name="passwordLogin" type="password" className="form-control" id="inputPasswordLogin"></input>
                 </div>
                 <button type="submit" className="btn btn-primary">Sign In</button>
             </form>
