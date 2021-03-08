@@ -1,12 +1,12 @@
-import React from 'react'
-import { useHistory, useState } from "react-router-dom";
+import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import LoginControl from '../components/LoginControl';
 
 
 let loginHandle = (event, history, setButton, login) => {
     event.preventDefault();
-    let email = login.email;
-    let pass = login.pass;
+    let email = login.emailLogin;
+    let pass = login.passwordLogin;
 
     let url = "https://6023acfe6bf3e6001766b5db.mockapi.io/reactGallery";
 
@@ -36,8 +36,8 @@ let loginHandle = (event, history, setButton, login) => {
 function Login(props) {
     let history = useHistory();
     const [login, setLogin] = useState({
-        email : "",
-        pass : ""
+        emailLogin : "",
+        passwordLogin : ""
     })
 
     let changeLogin = (e) => {

@@ -1,14 +1,14 @@
-import React from 'react'
-import { useHistory, useState } from "react-router-dom";
+import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
 
 
 let registerHandle = (event, history, register) => {
     event.preventDefault();
-    let name = register.name;
-    let email = register.email;
-    let pass = register.pass;
-    let passCheck = register.passCheck;
-    let biodata = register.biodata;
+    let name = register.nameRegister;
+    let email = register.emailRegister;
+    let pass = register.passwordRegister;
+    let passCheck = register.passwordCheckRegister;
+    let biodata = register.biodataRegister;
 
     if(pass !== passCheck){
         alert("Password anda dengan Confirm Password tidak sama!");
@@ -53,11 +53,11 @@ let registerHandle = (event, history, register) => {
 function Register() {
     let history = useHistory();
     const [register, setRegister] = useState({
-        name : "",
-        email : "",
-        pass : "",
-        passCheck : "",
-        biodata : ""
+        nameRegister : "",
+        emailRegister : "",
+        passwordRegister : "",
+        passwordCheckRegister : "",
+        biodataRegister : ""
     })
 
     let changeRegister = (e) => {
